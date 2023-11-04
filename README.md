@@ -1,1 +1,3 @@
 # SA2C-Recommender-System
+
+This is a recommender system developed as a homework assignment for Duke AIPI 531 - Deep Reinforcement Learning Applications.  It is designed to compare model performance between recommenders that use and do not use item features.  The recommender system is based upon the research paper: Supervised Advantage Actor-Critic for Recommender Systems by Xin Xin et al which can be found here (https://arxiv.org/abs/2111.03474) and the original source code for this type of recommender system can be found here (https://colab.research.google.com/corgiredirector?site=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F185KB520pBLgwmiuEe7JO78kUwUL_F45t%2Fview%3Fusp%3Dsharing).
