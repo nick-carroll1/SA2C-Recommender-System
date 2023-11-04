@@ -1,0 +1,76 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 1 files
+Detected 5 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: Code/SA2C.py
+--------------------------------------------------------------------------------
+Code/SA2C.py:83:29: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+Code/SA2C.py:164:36: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+Code/SA2C.py:179:26: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+Code/SA2C.py:214:27: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+Code/SA2C.py:217:26: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+================================================================================
+Detailed log follows:
+
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'Code/SA2C.py'
+ outputting to 'Code/SA2C_v2.py'
+--------------------------------------------------------------------------------
+
+73:27: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+76:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+78:26: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+79:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+83:29: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+86:46: INFO: Renamed 'tf.nn.dynamic_rnn' to 'tf.compat.v1.nn.dynamic_rnn'
+87:20: INFO: Renamed 'tf.contrib.rnn.GRUCell' to 'tf.compat.v1.nn.rnn_cell.GRUCell'
+94:38: INFO: Changed tf.to_float call to tf.cast(..., dtype=tf.float32).
+104:25: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+104:25: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+107:40: INFO: Renamed 'tf.truncated_normal' to 'tf.random.truncated_normal'
+110:31: INFO: Added keywords to args of function 'tf.nn.conv2d'
+110:31: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+121:33: INFO: Added keywords to args of function 'tf.nn.max_pool'
+121:33: INFO: Renamed keyword argument for tf.nn.max_pool from value to input
+121:33: INFO: Renamed 'tf.nn.max_pool' to 'tf.nn.max_pool2d'
+134:21: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+134:21: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+136:36: INFO: Renamed 'tf.truncated_normal' to 'tf.random.truncated_normal'
+138:27: INFO: Added keywords to args of function 'tf.nn.conv2d'
+138:27: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+149:21: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+149:21: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+150:41: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+155:38: INFO: Changed tf.to_float call to tf.cast(..., dtype=tf.float32).
+164:36: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+179:26: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+184:38: INFO: Changed tf.to_float call to tf.cast(..., dtype=tf.float32).
+186:27: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+194:25: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+214:27: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+217:26: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+221:27: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+223:34: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+225:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+226:37: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+228:26: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+229:28: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+231:36: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+232:44: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+238:33: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+274:24: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+277:24: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+283:17: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+284:47: INFO: Renamed 'tf.random_normal' to 'tf.random.normal'
+286:45: INFO: Renamed 'tf.random_normal' to 'tf.random.normal'
+382:4: INFO: Renamed 'tf.reset_default_graph' to 'tf.compat.v1.reset_default_graph'
+398:9: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+400:17: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+--------------------------------------------------------------------------------
+
