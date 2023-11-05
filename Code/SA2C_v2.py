@@ -212,10 +212,10 @@ class QNetwork:
                 self.seq = normalize(self.seq)
                 self.states_hidden = extract_axis_1(self.seq, self.len_state - 1)
 
-                self.output1 = tf.compat.v1.layers.dense(self.states_hidden, self.item_num, activation=None)  # all q-values
+            self.output1 = tf.compat.v1.layers.dense(self.states_hidden, self.item_num, activation=None)  # all q-values
 
-            self.output2= tf.contrib.layers.fully_connected(self.states_hidden, self.item_num,
-                                                             activation_fn=None, scope="ce-logits")  # all ce logits
+            self.output2= tf.compat.v1.layers.dense(self.states_hidden, self.item_num,
+                                                             activation=None, scope="ce-logits")  # all ce logits
 
             # TRFL way
             self.actions = tf.compat.v1.placeholder(tf.int32, [None])
