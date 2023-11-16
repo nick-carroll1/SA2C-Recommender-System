@@ -502,6 +502,8 @@ def evaluate(sess):
     while evaluated < len(eval_ids):
         states, len_states, actions, rewards = [], [], [], []
         for i in range(batch):
+            if evaluated >= len(eval_ids):
+                break
             id = eval_ids[evaluated]
             group = groups.get_group(id)
             history = []
