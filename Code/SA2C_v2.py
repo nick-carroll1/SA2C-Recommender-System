@@ -145,9 +145,10 @@ class QNetwork:
                 tf.int32, [None]
             )  # the length of valid positions, because short sesssions need to be padded
 
+            # Adding a placeholder for item features for cold-start
             self.feature_inputs = tf.compat.v1.placeholder(
-                tf.int32, shape=(self.item_num, self.item_feature_size)
-            )  # item features for cold-start
+                tf.int32, shape=(self.item_num, self.item_feature_size + 1)
+            )  # item_feature_size + 1 for the bias term (additional column of ones)
 
             # one_hot_input = tf.one_hot(self.inputs, self.item_num+1)
             self.input_emb = tf.nn.embedding_lookup(
@@ -344,13 +345,13 @@ class QNetwork:
                 1 - self.lambda_factor
             ) * self.output1_original + self.lambda_factor * tf.matmul(
                 self.states_hidden, self.feature_emb, transpose_b=True
-            )  # need to add a bias term
+            )  # added a column of ones earlier to item properties instead of adding a bias term
 
             self.output2 = (
                 1 - self.lambda_factor
             ) * self.output2_original + self.lambda_factor * tf.matmul(
                 self.states_hidden, self.feature_emb, transpose_b=True
-            )  # need to add a bias term
+            )  # added a column of ones earlier to item properties instead of adding a bias term
 
             # TRFL way
             self.actions = tf.compat.v1.placeholder(tf.int32, [None])
@@ -454,13 +455,13 @@ class QNetwork:
                     tf.random.normal([self.state_size, self.hidden_size], 0.0, 0.01),
                     name="pos_embeddings",
                 )
-                # Adding an embedding layer for items
+                # Adding an embedding layer for item features
                 item_embeddings = tf.Variable(
                     tf.random.normal(
-                        [self.item_feature_size, self.hidden_size], 0.0, 0.01
+                        [self.item_feature_size + 1, self.hidden_size], 0.0, 0.01
                     ),
                     name="item_embeddings",
-                )
+                )  # item_feature_size + 1 for the bias term (additional column of ones)
                 all_embeddings["state_embeddings"] = state_embeddings
                 all_embeddings["pos_embeddings"] = pos_embeddings
                 all_embeddings["item_embeddings"] = item_embeddings
@@ -617,6 +618,8 @@ if __name__ == "__main__":
     )
 
     replay_buffer = pd.read_pickle(os.path.join(data_directory, "replay_buffer.df"))
+
+    # load item features
     item_properties = (
         pd.read_csv(os.path.join(data_directory, "item_properties-testing2.csv"))
         .iloc[
@@ -624,6 +627,14 @@ if __name__ == "__main__":
         ]  # assume the first column is item id and remove it  # also, there seems to be an off-by-one error: double check
         .to_numpy()
     )
+
+    # normalize item features
+    item_properties = (
+        item_properties - item_properties.mean(axis=0)
+    ) / item_properties.std(axis=0)
+
+    # add a column of ones to item properties
+    item_properties = np.hstack((item_properties, np.ones((item_num, 1))))
 
     f = open(os.path.join(data_directory, "pop_dict.txt"), "r")
     pop_dict = eval(f.read())
